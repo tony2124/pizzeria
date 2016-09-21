@@ -35,18 +35,20 @@ class PizzasController extends AppController
 
         if($this->request->is('post')){
         //obtener el tamaño de las pizzas
-        $this->loadModel('Sizes');
+        $this->loadModel('Size');
         
         $sizes_id = $this->request->data['size_id']; 
         $varieties_id = $this->request->data['variety_id'];
         $i = 0;
         foreach ($sizes_id as $size_id) {
-            $sizes[$i++] = $this->Sizes->find()->where(array('size_id'=>$size_id))->first();
+            $sizes[$i++] = $this->Size->findBySizeId($size_id); 
+            //->where(array('size_id'=>$size_id))->first();
         }
-        $this->loadModel('Varieties');
+        $this->loadModel('Variety');
         $i = 0;
         foreach ($varieties_id as $variety_id) {
-            $varieties[$i++] = $this->Varieties->find()->where(array('variety_id'=>$variety_id))->first();
+            $varieties[$i++] = $this->Variety->findByVarietyId($variety_id); 
+            //->where(array('variety_id'=>$variety_id))->first();
         }
 
         $this->set('sizes',$sizes);
@@ -67,29 +69,31 @@ class PizzasController extends AppController
         $varieties_id = $this->request->data['variety_id'];
 
         $data = [
-            'customer_id'=>$this->request->data['customer_id'],
-            'total'=>$this->request->data['total'],
-            'telefono'=>$this->request->data['telefono'],
-            'colonia'=>$this->request->data['colonia'],
-            'numero'=>$this->request->data['numero'],
-            'calle'=>$this->request->data['calle'],
-            'referencias'=>$this->request->data['referencias'],
+            'customer_id'=>$this->request->data['orden']['customer_id'],
+            'total'=>$this->request->data['orden']['total'],
+            'telefono'=>$this->request->data['orden']['telefono'],
+            'colonia'=>$this->request->data['orden']['colonia'],
+            'numero'=>$this->request->data['orden']['numero'],
+            'calle'=>$this->request->data['orden']['calle'],
+            'referencias'=>$this->request->data['orden']['referencias'],
             'date'=>date('Y-m-d H:i:s')
         ];
 
-        $this->loadModel('Sales');
-        if( $this->Sales->save(new Sale($data)) ){
-            $consulta = $this->Sales->find('all')->last();
-            $id = $consulta['sale_id'];
+        $this->loadModel('Sale');
+        if( $this->Sale->save($data) ){
+            
+            $consulta = $this->Sale->find('first', array('order'=>array('Sale.sale_id'=>'desc')));
+            $id = $consulta['Sale']['sale_id'];
             $i = 0;
-            $this->loadModel('SaleDetails');
+            $this->loadModel('SaleDetail');
+
             foreach ($sizes_id as $size_id) {
-                $data_detail = [
+                $data_detail = array(
                     'sale_id'=>$id,
                     'size_id'=> $size_id,
                     'variety_id'=> $varieties_id[$i++]
-                ];
-                $this->SaleDetails->save(new SaleDetail($data_detail));
+                );
+                $this->SaleDetail->save($data_detail);
             }
             $this->redirect(array('action'=>'congratulations'));
         }

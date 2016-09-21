@@ -60,19 +60,19 @@
                 <table class="table table-bordered">
                     <tr>
                         <td width="20%">Nombre</td>
-                        <td><?= $this->request->session()->read('name') ?></td>
+                        <td><?= $this->Session->read('name') ?></td>
                     </tr>
                      <tr>
                         <td>Correo</td>
-                        <td><?= $this->request->session()->read('email') ?></td>
+                        <td><?= $this->Session->read('email') ?></td>
                     </tr>
                     <tr>
                         <td>Teléfono</td>
-                        <td><?= $this->request->session()->read('tel') ?></td>
+                        <td><?= $this->Session->read('tel') ?></td>
                     </tr>
                     <tr>
                         <td>Dirección</td>
-                        <td><?= $this->request->session()->read('address') ?></td>
+                        <td><?= $this->Session->read('address') ?></td>
                     </tr>
                 </table>
                 <h4>Dirección de envío</h4>
@@ -100,7 +100,7 @@
                 </table>
             </div>
             <?= $this->Form->create('orden',array('url'=>array('controller'=>'pizzas','action'=>'enviar'))); ?>
-            <?= $this->Form->input('customer_id',array( 'type' =>'hidden' , 'value' => $this->request->session()->read('id'))); ?>
+            <?= $this->Form->input('customer_id',array( 'type' =>'hidden' , 'value' => $this->Session->read('id'))); ?>
              <?= $this->Form->input('colonia',array( 'type' =>'hidden' , 'value' => $this->request->data['colonia'])); ?>
              <?= $this->Form->input('numero',array( 'type' =>'hidden' , 'value' => $this->request->data['numero'])); ?>
              <?= $this->Form->input('calle',array( 'type' =>'hidden' , 'value' => $this->request->data['calle'])); ?>
@@ -123,16 +123,18 @@
                             <tr>
                                 <td><?= $i+1 ?></td>
                                 <td>
-                                    <?= $size['size_name'] ?>
-                                    <?= $this->Form->input('size_id[]',array( 'type' =>'hidden' , 'value' => $size['size_id'])); ?>
+                                    <?= $size['Size']['size_name'] ?>
+                                    
+                                    <input name="size_id[]" type="hidden" value="<?= $size['Size']['size_id'] ?>">
 
                                 </td>
                                 <td>
-                                    <?= $varieties[$i]['variety_name']." (".$varieties[ $i ]['ingredients'].")" ?>
-                                    <?= $this->Form->input('variety_id[]',array('type'=>'hidden', 'value'=>$varieties[$i++]['variety_id'])); ?>
+                                    <?= $varieties[$i]['Variety']['variety_name']." (".$varieties[ $i ]['Variety']['ingredients'].")" ?>
+                                    
+                                    <input name="variety_id[]" type="hidden" value="<?= $varieties[$i++]['Variety']['variety_id'] ?>">
                                 </td>
-                                <td align="right"><?= "$".$size['price'] ?></td>
-                                <?php $total += $size['price'] ?>
+                                <td align="right"><?= "$".$size['Size']['price'] ?></td>
+                                <?php $total += $size['Size']['price'] ?>
                             </tr>
                         <?php } ?>
                             <tr>
