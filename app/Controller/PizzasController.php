@@ -84,17 +84,23 @@ class PizzasController extends AppController
             
             $consulta = $this->Sale->find('first', array('order'=>array('Sale.sale_id'=>'desc')));
             $id = $consulta['Sale']['sale_id'];
+            
             $i = 0;
             $this->loadModel('SaleDetail');
-
+            
+            $data_detail = array();
+            
             foreach ($sizes_id as $size_id) {
-                $data_detail = array(
-                    'sale_id'=>$id,
-                    'size_id'=> $size_id,
-                    'variety_id'=> $varieties_id[$i++]
-                );
-                $this->SaleDetail->save($data_detail);
+                $data_detail[$i] = array(
+                            'sale_id'=>$id,
+                            'size_id'=> $size_id,
+                            'variety_id'=> $varieties_id[$i++]
+                            );
             }
+
+            $this->SaleDetail->saveMany($data_detail, array('deep'=>true));
+            
+            
             $this->redirect(array('action'=>'congratulations'));
         }
         else

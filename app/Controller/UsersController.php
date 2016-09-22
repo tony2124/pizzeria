@@ -29,7 +29,6 @@ class UsersController extends AppController
 	        //Si se ha encontrado al usuario en la consulta
 	         if($cust)
 	         {
-
 		        //Si existe se redirecciona al usuario a la aplicación creando una variable de sesión 
 		        $this->Session->write('name',$cust['Customer']['customer_name']);
 		        $this->Session->write('id',$cust['Customer']['customer_id']);
@@ -45,7 +44,7 @@ class UsersController extends AppController
 			  //Si los datos no son correctos se comunica al usuario y se le devuelve al mismo
 	          //formulario de login
 	          $this->Session->setFlash(__('<p class="label label-danger">Nombre de usuario y/o password incorrectos</p>'));
-
+	          $this->redirect(array('action'=>'index'));
 	         }
 		}
 
