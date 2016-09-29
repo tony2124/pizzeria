@@ -4,7 +4,9 @@ class PizzasController extends AppController
 {
     public function index()
     {
-        // Action logic goes here.
+        $this->loadModel('Variety');
+        $varieties = $this->Variety->find('all');
+        $this->set('varieties',$varieties);
     }
 
     //esta funcion permite seleccionar las pizzas y direccion de envio
