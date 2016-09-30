@@ -23,8 +23,8 @@ class UsersController extends AppController
 		    	 //Consulta SQL para buscar al usuario con sus credenciales en la BD
         		//$pass = md5($this->data['formulario']['clave']);
 				$cust = $this->Customer->find('first',array('conditions'=>array(
-				                'customer.customer_email'=>$this->request->data['user']['email'],
-				                'customer.customer_pass'=>$this->request->data['user']['clave'])));
+				                'Customer.customer_email'=>$this->request->data['user']['email'],
+				                'Customer.customer_pass'=>$this->request->data['user']['clave'])));
 
 	        //Si se ha encontrado al usuario en la consulta
 	         if($cust)
