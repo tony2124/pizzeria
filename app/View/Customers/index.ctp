@@ -56,10 +56,10 @@
         <div class="container">
 
   <div class="col-xs-12 col-sm-12 col-md-12 mparent">
-    <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 epadding2">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4 epadding2">
      <h1 class="text-center"><!-- <?php print $this->Html->image("logo.png", array('class'=>'img-circle profile_img','style'=>'width:160px; margin:0')) ?>-->Regístrate<small> en D'Gusta Pizza</small></h1>
     </div>
-    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 child epadding3">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4 child epadding3 form-group-lg">
       <?php echo $this->Form->create('customer',array('class'=>'form-horizontal form-label-left','url'=>array('action'=>'registrar'))); ?>
         <div class="form-group">
           <label for="first-name">Nombre <span class="required">*</span></label>
@@ -88,10 +88,10 @@
           <div class="row">
             <div class="col-md-1"></div>
              <div class="col-md-5">
-                <?= $this->Html->link( 'Regresar',  array( 'controller'=>'logins','action'=>'index'), array( 'class'=>'btn btn-default', 'style'=>'width:100%')); ?>
+                <?= $this->Html->link( 'Regresar',  array( 'controller'=>'users','action'=>'index'), array( 'class'=>'btn btn-default btn-lg', 'style'=>'width:100%')); ?>
             </div>
             <div class="col-md-5">
-                <?= $this->Form->submit("Registrarme",array('class'=>'btn btn-success', 'style'=>'width:100%')); 
+                <?= $this->Form->submit("Registrarme",array('class'=>'btn btn-success btn-lg', 'style'=>'width:100%')); 
            ?> 
             </div>
             <div class="col-md-1"></div>

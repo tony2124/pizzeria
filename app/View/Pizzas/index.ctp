@@ -59,7 +59,7 @@
             <div class="intro-text">
                 <div class="intro-lead-in">&nbsp;</div>
                 <div class="intro-heading">&nbsp;</div>
-                <a href="#services" class="page-scroll btn btn-xl">Quiero una pizza</a>
+                <a href="<?= $this->Html->url(array('controller'=>'users', 'action'=>'index')) ?>" class="page-scroll btn btn-xl">Quiero una pizza</a>
             </div>
         </div>
     </header>

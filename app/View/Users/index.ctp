@@ -54,17 +54,17 @@
      <!-- sección de promociones -->
     <section id="ordena">
         <div class="container">
-  <div class="col-xs-12 col-sm-12 col-md-12 mparent">
+  <div class="col-xs-12 col-sm-12 col-md-12 mparent form-group-lg">
     <div class="col-xs-8 col-xs-offset-2 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 epadding2">
       <p align="center">
         <?php print $this->Html->image("logo.png", array('class'=>'','style'=>'width:180px; margin:0')) ?>
       </p>
       <h3 align="center" class="mparent2">Inicia sesión<small> en D'Gusta Pizza</small></h3>
     </div>
-    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 child epadding3">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-4 child">
       <?php echo $this->Form->create('user',array('class'=>'form-horizontal form-label-left','url'=>array('action'=>'auth'))); ?>
         <div class="form-group">
-          <label for="first-name">Correo electrónico <span class="required">*</span></label>
+          <label class="control-label" for="first-name">Correo electrónico <span class="required">*</span></label>
           <?php echo $this->Form->input('email',array('label'=>'', 'type' => 'email', 'placeholder' => 'email@dominio.com', 'class'=>'form-control col-md-7 col-xs-12','empty'=>false)); ?>   
         </div>
         <div class="form-group">
@@ -74,11 +74,11 @@
         <div class="ln_solid"></div>
         <div class="form-group form-inline">
           <div class="row">
-             <div class="col-md-4"></div>
-             <div class="col-md-4">
-                <?php echo $this->Form->submit("Iniciar sesión",array('class'=>'btn btn-success')); ?> 
+             <div class="col-md-2"></div>
+             <div class="col-md-8">
+                <?php echo $this->Form->submit("Iniciar sesión",array('class'=>'btn btn-success btn-lg', 'style'=>'width:100%')); ?> 
             </div>
-            <div class="col-md-4"></div>
+            <div class="col-md-2"></div>
          </div>
         </div>
     </div>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SB Admin - Bootstrap Admin Template</title>
 
     <!-- Custom CSS -->
     <?= $this->Html->css('sb-admin.css') ?>
@@ -105,7 +104,7 @@
                         <?= $this->Form->end() ?>
                     </div>
                     <p>&nbsp;</p>
-                        <?= $this->Html->image('header-bg',array('class'=>'img-responsive')) ?>
+                        <?= $this->Html->image('header-bg.jpg',array('class'=>'img-responsive')) ?>
                 </div>
           
             </div>

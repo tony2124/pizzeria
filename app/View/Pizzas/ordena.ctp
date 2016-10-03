@@ -5,7 +5,9 @@
 
     <!-- Theme CSS -->
     <?= $this->Html->css('agency.min.css') ?>
+    
     <?= $this->Html->css('font-awesome.min.css') ?>
+
 
 <body id="page-top" class="index">
 
@@ -24,7 +26,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
-                        <a href="#page-top"></a>
+                        <a href="<?= $this->Html->url(array('controller'=>'pizzas')) ?>"></a>
                     </li>
                     <li>
                         <!--<a class="page-scroll" href="#tam">Tamaños</a>-->
@@ -59,7 +61,7 @@
             	<div class="col-sm-3"></div>
                 <div class="col-lg-6 text-center">
                     <h2 class="section-heading">Orden de pizzas</h2>
-                    <h3 class="section-subheading text-muted" style="margin-bottom: 0px">Hola <strong><?= $this->Session->read('name') ?></strong>! Puedes ordenar tu pizza desde este apartado. Ya conocemos tu dirección, pero nos interesa saber a dónde vamos a mandar tu pizza. Sientete feliz de ordenar.</h3>
+                    <h3 class="section-subheading text-muted" style="margin-bottom: 0px">Hola <strong><?= $this->Session->read('name') ?></strong>! Puedes ordenar tu pizza desde este apartado. Ya conocemos tu dirección, pero nos interesa saber a dónde vamos a mandar tu pizza. Sientete feliz de ordenar. <span style="float: right"> <?= $this->Html->link("Cambiar de usuario", array('controller'=>'users', 'action'=>'logout'),array('style'=>'color: #337ab7')) ?></span></h3>
 
                 </div>
                 <div class="col-sm-3"></div>
@@ -70,20 +72,23 @@
                 <div class="col-sm-6">
                 	<form class="form-horizontal" method="post" name="numbers">
                         <hr>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">Número de pizzas</label>
-                            <div class="col-sm-7">
+                        <div class="form-group form-group-lg">
+                            <label class="col-sm-4 control-label">Número de pizzas</label>
+                            <div class="col-sm-4">
                                <select <?php if ($number > 0) { ?> disabled <?php } ?> name="number" id="number" class="form-control">
                                 <?php for($i = 0; $i < 7; $i++){ ?>
                                 <option <?php if($number == ($i+1)) print "selected" ?> value="<?= $i+1 ?>"><?= $i+1 ?></option>
                                 <?php } ?>
                               </select>
                             </div>
+                            <div class="col-sm-1">
+                                &nbsp;
+                            </div>
                             <div class="col-sm-2">
                                 <?php if ($number > 0) { ?> 
-                                <?= $this->Html->link("< Atrás",array('action'=>'ordena'),array('class'=>'btn btn-primary')) ?>
+                                <?= $this->Html->link("< Atrás",array('action'=>'ordena'),array('class'=>'btn btn-primary btn-lg')) ?>
                                  <?php }else{ ?>
-                                 <?= $this->Form->button("Continuar",array('class'=>'btn btn-primary')) ?>
+                                 <?= $this->Form->button("Continuar",array('class'=>'btn btn-primary btn-lg')) ?>
                                  <?php } ?>
                             </div>
                         </div>
@@ -94,9 +99,9 @@
 					  
                     <?php for($i = 0; $i < $number; $i++){ ?>
                     <span class="label label-primary">Pizza #<?= $i+1 ?></span>
-                    <div class="form-group">
-    				    <label class="col-sm-2 control-label">Tamaño</label>
-    				    <div class="col-sm-10">
+                    <div class="form-group form-group-lg">
+    				    <label class="col-sm-3 control-label">Tamaño</label>
+    				    <div class="col-sm-9">
     				      <select name="size_id[]" class="form-control">
                             <?php foreach ($sizes as $size) { ?>
                                 <option value="<?= $size['Size']['size_id'] ?>"><?= $size['Size']['size_name'] ?></option>    
@@ -104,9 +109,9 @@
     				      </select>
     				    </div>
     				</div>
-    				<div class="form-group">
-    				    <label class="col-sm-2 control-label">Variedad</label>
-    				    <div class="col-sm-10">
+    				<div class="form-group form-group-lg">
+    				    <label class="col-sm-3 control-label">Variedad</label>
+    				    <div class="col-sm-9">
     				      <select name="variety_id[]" class="form-control">
     				      	<?php foreach ($varieties as $var) { ?>
                                 <option value="<?= $var['Variety']['variety_id'] ?>"><?= $var['Variety']['variety_name'] ?></option>
@@ -118,43 +123,43 @@
                     }
                 ?>
                 <hr>
-                <span class="label label-primary">Datos de envío</span>
-					   <div class="form-group">
-					    <label class="col-sm-2 control-label">Teléfono / contacto</label>
-					    <div class="col-sm-10">
+                      <span class="label label-primary">Datos de envío</span>
+					  <div class="form-group form-group-lg">
+					    <label class="col-sm-3 control-label">Teléfono / contacto</label>
+					    <div class="col-sm-9">
 					      <input name="telefono" type="number" minlength="10" required class="form-control" placeholder="ej. 453 105 3456">
 					    </div>
 					  </div>
-					  <div class="form-group">
-					    <label class="col-sm-2 control-label">Colonia</label>
-					    <div class="col-sm-10">
+					  <div class="form-group form-group-lg">
+					    <label class="col-sm-3 control-label">Colonia</label>
+					    <div class="col-sm-9">
 					      <input name="colonia" type="text" minlength="5" required class="form-control" placeholder="ej. Col. Benito Juárez">
 					    </div>
 					  </div>
-					  <div class="form-group">
-					    <label class="col-sm-2 control-label">Número int/ext</label>
-					    <div class="col-sm-10">
+					  <div class="form-group form-group-lg">
+					    <label class="col-sm-3 control-label">Número int/ext</label>
+					    <div class="col-sm-9">
 					      <input name="numero" type="text" required class="form-control" placeholder="ej. Núm. Int. 67, Núm ext. 67">
 					    </div>
 					  </div>
-					  <div class="form-group">
-					    <label class="col-sm-2 control-label">Calle</label>
-					    <div class="col-sm-10">
+					  <div class="form-group form-group-lg">
+					    <label class="col-sm-3 control-label">Calle</label>
+					    <div class="col-sm-9">
 					      <input name="calle" type="text" required minlength="5" class="form-control" placeholder="ej. Juan Escutia">
 					    </div>
 					  </div>
-					  <div class="form-group">
-					    <label class="col-sm-2 control-label">Referencias</label>
-					    <div class="col-sm-10">
+					  <div class="form-group form-group-lg">
+					    <label class="col-sm-3 control-label">Referencias</label>
+					    <div class="col-sm-9">
 					      <textarea name="referencias" required minlength="10" class="form-control" placeholder="ej. Casa verde, está detrás del auditorio, a una cuadra del sitio de taxis Alfa."></textarea>
 					    </div>
 					  </div>
-                      <div class="form-group">
+                      <div class="form-group form-group-lg">
                         <span style="float: right"> <?= $this->Html->link("Cambiar de usuario", array('controller'=>'users', 'action'=>'logout'),array('style'=>'color: #337ab7')) ?></span>
                       </div>
 					 <div class="form-group text-center">
-					 	<a class="btn btn-default" href="../users/logout"><i class="glyphicon glyphicon-remove"></i> Cancelar pedido</a>
-                        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Procesar pedido</button>
+					 	<a class="btn btn-default btn-lg" href="../users/logout"><i class="glyphicon glyphicon-remove"></i> Cancelar pedido</a>&nbsp;
+                        <button type="submit" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-ok"></i> Procesar pedido</button>
 					 </div>
                     <?= $this->Form->end(); ?>
                 <?php } ?>

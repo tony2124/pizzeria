@@ -24,17 +24,29 @@ $cakeDescription = 'D&tilde;Gusta Pizza';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
-    <?= $this->Html->css('bootstrap.min.css'); ?>
     <?= $this->Html->script('jquery.min.js') ?>
+    <?= $this->Html->css('cargando.css') ?>
+    <script type="text/javascript">
+        $(window).load(function () {
+          // Una vez se cargue al completo la página desaparecerá el div "cargando"
+          $('#contenedor').hide();
+        });
+    </script>
+
+    <?= $this->Html->meta('icon') ?>
     <?= $this->Html->script('bootstrap.min.js') ?>
+    <?= $this->Html->css('bootstrap.min.css'); ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
 </head>
 <body>
 
-   
+   <div id="contenedor">
+     <div class="loader" id="loader">Loading...</div>
+    <!--<div id="preloader_3"></div>-->
+    </div>
    <!-- <div class="container clearfix">-->
         <?= $this->fetch('content') ?>
     <!--</div>-->
