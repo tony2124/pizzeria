@@ -83,7 +83,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                             <small>Variedades de pizzas</small>
+                             <small>Promociones</small>
 
                         </h1>
                         
@@ -91,12 +91,40 @@
                 </div>
                
                  <div class="row">
-                    <p>Selecciona una nueva foto de portada, las dimensiones recomendadas son: 1440 x 900.</p>
-                    <?= $this->Form->create('img', array('type'=>'file')) ?>
-                    <?= $this->Form->input('', array('type'=>'file')) ?>
-                    <?= $this->Form->input('Enviar', array('type'=>'submit', 'class'=>'btn btn-primary')) ?>
+                    <div class="col-sm-7">
+                        <p>Las dimensiones apropiadas para las imágenes son: 720 x 440. Si no se consigue estas dimensiones se recomienda que todas las imágenes tengan las mismas dimensiones.</p>
+                    <?= $this->Form->create('Variety', array('type'=>'file', 'class'=>'form-horizontal', 'url'=>array('controller'=>'admins','action'=>'save_variety'))) ?>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Título de la promoción</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="nombre" class="form-control"  placeholder="Nombre de la variedad">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Descripción</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Tipo</label>
+                         &nbsp;&nbsp;&nbsp;<input type="checkbox" name="nombre">&nbsp;Descuento
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="nombre">&nbsp;2 x 1
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="nombre">&nbsp;Gratis
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">Foto</label>
+                        <div class="col-sm-10">
+                          <?= $this->Form->input('foto',array('type'=>'file')) ?>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-default">Agregar</button>
+                        </div>
+                      </div>
                     <?= $this->Form->end() ?>
-                    
+                    </div>
                 </div>
           
             </div>
