@@ -138,20 +138,15 @@
                 </div>
             </div>
             <div class="row">
+                <?php foreach ($promotions as $prom) { ?>
                 <div class="col-sm-4">
                     <div class="team-member">
-                        <img src="img/promo/cocacola.png" class="img-responsive img-circle" alt="">
-                        <h4>Un refresco 2L GRATIS</h4>
-                        <p class="text-muted">LLévate un refresco gratis de 2L en la compra de una pizza mediana o familiar. Cualquier sabor, incluyendo Coca Cola.</p>
+                        <?= $this->Html->image('promo/'.$prom['Promotion']['promotion_photo'],array('class'=>'img-responsive img-circle')) ?>
+                        <h4><?= $prom['Promotion']['promotion_title'] ?></h4>
+                        <p class="text-muted"><?= $prom['Promotion']['promotion_desc'] ?></p>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/promo/dos.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Lunes de 2 x 1</h4>
-                        <p class="text-muted">Visita nuestro estabelcimiento los días lunes y disfruta de la promoción que tenemos especialmente para ti. ¡Ordena dos pizzas y paga sólamente una!</p>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">

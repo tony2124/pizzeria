@@ -5,8 +5,11 @@ class PizzasController extends AppController
     public function index()
     {
         $this->loadModel('Variety');
+        $this->loadModel('Promotion');
         $varieties = $this->Variety->find('all');
+        $promotions = $this->Promotion->find('all');
         $this->set('varieties',$varieties);
+        $this->set('promotions',$promotions);
     }
 
     //esta funcion permite seleccionar las pizzas y direccion de envio

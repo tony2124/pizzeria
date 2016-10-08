@@ -19,6 +19,7 @@ $(function() {
             if (firstName.indexOf(' ') >= 0) {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
+            /*
             $.ajax({
                 url: "././mail/contact_me.php",
                 type: "POST",
@@ -29,7 +30,7 @@ $(function() {
                     message: message
                 },
                 cache: false,
-                success: function() {
+                success: function() {*/
                     // Success message
                     $('#success').html("<div class='alert alert-success'>");
                     $('#success > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
@@ -40,7 +41,7 @@ $(function() {
                         .append('</div>');
 
                     //clear all fields
-                    $('#contactForm').trigger("reset");
+                    $('#contactForm').trigger("reset");/*
                 },
                 error: function() {
                     // Fail message
@@ -52,7 +53,7 @@ $(function() {
                     //clear all fields
                     $('#contactForm').trigger("reset");
                 },
-            });
+            });*/
         },
         filter: function() {
             return $(this).is(":visible");

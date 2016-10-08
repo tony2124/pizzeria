@@ -51,7 +51,8 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                       <a href="<?= $this->Html->url(array('controller'=>'admins','action'=>'index')) ?>"><i class="fa fa-fw fa-dashboard"></i> Estadísticas</a>  
+                       <a href="<?= $this->Html->url(array('controller'=>'admins','action'=>'index')) ?>"><i class="fa fa-fw fa-dashboard"></i> Estadísticas</a>
+                        
                     </li>
                     <li>
                         <a href="<?= $this->Html->url(array('controller'=>'admins','action'=>'orders')) ?>"><i class="fa fa-fw fa-bar-chart-o"></i> Órdenes</a>
@@ -97,13 +98,13 @@
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nombre de la variedad</label>
                         <div class="col-sm-10">
-                          <input type="text" name="nombre" class="form-control"  placeholder="Nombre de la variedad">
+                          <input type="text" name="nombre" class="form-control" value="<?= $variety['Variety']['variety_name'] ?>"  placeholder="Nombre de la variedad">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Ingredientes</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" name="ingredientes" placeholder="Ingredientes">
+                          <input type="text" class="form-control" name="ingredientes" value="<?= $variety['Variety']['ingredients'] ?>" placeholder="Ingredientes">
                         </div>
                       </div>
                       <div class="form-group">
@@ -121,32 +122,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
-                <?php foreach ($varieties as $variety) { ?>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <div class="row" >
-                                    <?= $this->Html->image('variedad/'.$variety['Variety']['picture'], array('class'=>'img-responsive')) ?>
-                                   
-                                </div>
-                            </div>
-                            
-                                <div class="panel-footer">
-                                    <strong><h4 class="pull-left"><span class="glyphicon glyphicon-cd"></span> <?= $variety['Variety']['variety_name'] ?></h4></strong>
-                                    <div class="clearfix"></div>
-                                        <span class="pull-left"><span class="glyphicon glyphicon-apple"></span> <?= $variety['Variety']['ingredients'] ?></span>
-                                    <div class="clearfix"></div>
-                                    <a href="<?=  $this->Html->url(array('controller'=>'admins', 'action'=>'delete/2/'.$variety['Variety']['variety_id'])) ?>" class="pull-right btn btn-danger btn-xs"> <span class="glyphicon glyphicon-remove"></span> </a>
-                                    <a href="<?=  $this->Html->url(array('controller'=>'admins', 'action'=>'edit_variety/'.$variety['Variety']['variety_id'])) ?>" class="pull-right btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> </a>
-                                    <div class="clearfix"></div>
-                                </div>
-                            
-                        </div>
-                    </div>
-                <?php } ?>
-                    
-                </div>
+               
           
             </div>
 
