@@ -89,7 +89,7 @@ class AdminsController extends AppController
     	$this->loadModel('Variety');
 
         //SE CONSULTA LA BASE DE DATOS
-        $varieties = $this->Variety->find('all');
+        $varieties = $this->Variety->find('all', array('conditions'=>array('approved'=>true)));
 
         //SE ENVÍA LA INFORMACIÓN A LAS VARIEDADES
         $this->set('varieties', $varieties);
@@ -211,7 +211,7 @@ class AdminsController extends AppController
             $this->loadModel("Promotion");
             
             //ELIMINA REGISTRO
-            $this->Promotion->deleteAll(array('promotion_id'=>$id), false);
+            $this->Promotion->updateAll(array('approved'=>false),array('promotion_id'=>$id));
 
             //REDIRECCIONA A LA ACCION PROMOCIONES
             $this->redirect(array('controller'=>'admins', 'action'=>'promotions'));
@@ -221,7 +221,8 @@ class AdminsController extends AppController
             //SE CARGA MODELO
             $this->loadModel("Variety");
             //ELIMINA LA VARIEDAD
-            $this->Variety->deleteAll(array('variety_id'=>$id), false);
+            $this->Variety->updateAll(array('approved'=>false),array('variety_id'=>$id));
+            
             //REDIRECCIONA A LA ACCION VARIEDADES
             $this->redirect(array('controller'=>'admins', 'action'=>'varieties'));
         }
@@ -232,11 +233,12 @@ class AdminsController extends AppController
         $this->loadModel("Sale");
 
         //PAGINACION DE USUARIOS REGISTRADOS, SE HACE CONSULTA DE LOS USUARIOS
-        if($n == NULL){
-            $n = 1;
+        if($n == NULL) {
+            $n = 1;  
         }
-        
-        $sales = $this->Sale->find('all', array('limit'=>10, 'offset'=>($n - 1)*10));
+
+        //$sales = $this->Sale->find('all', array('limit'=>10, 'offset'=>($n - 1)*10));LIMIT 1, '.(($n - 1)*10)
+        $sales = $this->Sale->query('SELECT * FROM sales as Sale JOIN customers as Customer WHERE Sale.customer_id = Customer.customer_id ORDER BY Sale.sale_id DESC LIMIT 10 OFFSET '.(($n - 1)*10));
 
         //SE CONSULTA NUMERO DE CLIENTES
         $sales_count = $this->Sale->find('count');
@@ -246,6 +248,16 @@ class AdminsController extends AppController
         $this->set('sales_count', $sales_count);
     }
 
+    public function orderdetail( $id = NULL )
+    {
+        $this->loadModel('Sale');
+        $this->loadModel('SaleDetail');
+        $sales = $this->Sale->query('SELECT * FROM sales as Sale JOIN customers as Customer WHERE Sale.customer_id = Customer.customer_id AND Sale.sale_id = '.$id);
+        $details = $this->SaleDetail->query("SELECT * FROM sale_details as SaleDetail JOIN varieties as Variety JOIN sizes as Size WHERE SaleDetail.variety_id = Variety.variety_id AND SaleDetail.size_id = Size.size_id AND SaleDetail.sale_id = ".$id);  //find('all', array('conditions'=>array('sale_id'=>$id)));
+        $this->set('sales', $sales);
+        $this->set('details', $details);
+    }
+
     //MÉTODO PARA EDITAR EL STATUS DEL USUARIO
     public function edit_order( $id, $type)
     {
@@ -253,7 +265,7 @@ class AdminsController extends AppController
         $this->loadModel("Sale");
 
         //SE PREPARAN LOS DATOS
-        $data = array('approved'=>$type);
+        //$data = array('approved'=>$type);
         
         //SE ACTUALIZA LA INFORMACIÓN DEL CLIENTE
         if($this->Sale->updateAll( array('approved'=>$type),array('sale_id'=>$id) ))

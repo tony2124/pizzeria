@@ -24,7 +24,8 @@ class UsersController extends AppController
         		//$pass = md5($this->data['formulario']['clave']);
 				$cust = $this->Customer->find('first',array('conditions'=>array(
 				                'Customer.customer_email'=>$this->request->data['user']['email'],
-				                'Customer.customer_pass'=>$this->request->data['user']['clave'])));
+				                'Customer.customer_pass'=>$this->request->data['user']['clave'], 
+				                'Customer.approved'=>true)));
 
 	        //Si se ha encontrado al usuario en la consulta
 	         if($cust)

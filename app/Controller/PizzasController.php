@@ -26,7 +26,7 @@ class PizzasController extends AppController
         $sizes = $this->Size->find('all');
 
         $this->loadModel('Variety');
-        $varieties = $this->Variety->find('all');
+        $varieties = $this->Variety->find('all',array('conditions'=>array('approved'=>true)));
 
         $this->set('sizes',$sizes);
         $this->set('varieties',$varieties);
