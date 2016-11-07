@@ -201,6 +201,44 @@ class AdminsController extends AppController
         $this->set('promotion', $promotion);   
     }
 
+    //ACCION QUE PERMITE EDITAR LOS DATOS DE UNA VARIEDAD
+    public function editing_promotion($id)
+    {
+        //SE CARGA EL MODELO
+        $this->loadModel("Promotion");
+
+        //PREPARANDO LA IMAGEN
+        $nombre_temporal = $this->request->data['Promotion']['foto']['tmp_name'];
+        $imagen = $this->request->data['Promotion']['foto']['name'];
+        $ext = explode('.', $imagen)[1];
+        $name = date("Y_m_d_H_i_s").'.'.$ext;
+        $ruta = WWW_ROOT.'img/promo/';
+
+        //SI SE GUARDA LA IMAGEN
+        if(move_uploaded_file($nombre_temporal, $ruta.$name)){
+            //SE PREPARAN LOS DATOS
+            $data = array('promotion_title'=>"'".$this->request->data['nombre']."'",
+                        'promotion_desc'=>"'".$this->request->data['descripcion']."'",
+                        'promotion_type'=>$this->request->data['tipo'],
+                        'promotion_photo'=>"'" . $name . "'");
+        }
+        else
+        {
+            //SE PREPARAN LOS DATOS
+            $data = array('promotion_title'=>"'".$this->request->data['nombre']."'",
+                        'promotion_desc'=>"'".$this->request->data['descripcion']."'",
+                        'promotion_type'=>$this->request->data['tipo']);
+        }
+
+        //SE ACTUALIZA LA INFORMACIÓN DEL CLIENTE
+        if($this->Promotion->updateAll( $data , array('promotion_id'=>$id) ))
+        {
+            //SE REDIRECCIONA A LA ACCION DE USUARIOS
+          $this->redirect(array('action'=>'promotions'));
+        } 
+
+    }
+
     //ACCION QUE GUARDA UNA PROMOCION
     public function save_promotion()
     {

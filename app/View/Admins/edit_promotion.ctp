@@ -96,7 +96,7 @@
                  <div class="row">
                     <div class="col-sm-7">
                         <p>Las dimensiones apropiadas para las imágenes son: 500 x 500. Si no se consigue estas dimensiones se recomienda que todas las imágenes tengan las mismas dimensiones cuadradas.</p>
-                    <?= $this->Form->create('Promotion', array('type'=>'file', 'class'=>'form-horizontal', 'url'=>array('controller'=>'admins','action'=>'save_promotion'))) ?>
+                    <?= $this->Form->create('Promotion', array('type'=>'file', 'class'=>'form-horizontal', 'url'=>array('controller'=>'admins','action'=>'editing_promotion/'.$promotion['Promotion']['promotion_id']))) ?>
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Título de la promoción</label>
                         <div class="col-sm-10">
@@ -125,7 +125,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-default">Agregar</button>
+                          <button type="submit" class="btn btn-default">Guardar</button>
                         </div>
                       </div>
                     <?= $this->Form->end() ?>
