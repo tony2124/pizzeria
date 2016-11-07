@@ -142,6 +142,44 @@ class AdminsController extends AppController
         $this->set('variety', $variety);   
     }
 
+    //ACCION QUE PERMITE EDITAR LOS DATOS DE UNA VARIEDAD
+    public function editing_variety($id)
+    {
+        //SE CARGA EL MODELO
+        $this->loadModel("Variety");
+
+        //PREPARANDO LA IMAGEN
+        $nombre_temporal = $this->request->data['Variety']['foto']['tmp_name'];
+        $imagen = $this->request->data['Variety']['foto']['name'];
+        $ext = explode('.', $imagen)[1];
+        $name = date("Y_m_d_H_i_s").'.'.$ext;
+        $ruta = WWW_ROOT.'img/variedad/';
+
+        //SI SE GUARDA LA IMAGEN
+        if(move_uploaded_file($nombre_temporal, $ruta.$name)){
+            //SE PREPARAN LOS DATOS
+            $data = array('variety_name'=>"'".$this->request->data['nombre']."'",
+                        'ingredients'=>"'".$this->request->data['ingredientes']."'",
+                        'picture'=>"'" . $name . "'");
+        }
+        else
+        {
+            //SE PREPARAN LOS DATOS
+            $data = array('variety_name'=>"'".$this->request->data['nombre']."'",
+                        'ingredients'=>"'".$this->request->data['ingredientes']."'");
+        }
+
+        
+        
+        //SE ACTUALIZA LA INFORMACIÓN DEL CLIENTE
+        if($this->Variety->updateAll( $data , array('variety_id'=>$id) ))
+        {
+            //SE REDIRECCIONA A LA ACCION DE USUARIOS
+          $this->redirect(array('action'=>'varieties'));
+        } 
+
+    }
+
     //ACCION QUE PERMITE VISUALIZAR LAS PROMOCIONES
     public function promotions()
     {

@@ -94,7 +94,7 @@
                  <div class="row">
                     <div class="col-sm-7">
                         <p>Las dimensiones apropiadas para las imágenes son: 720 x 440. Si no se consigue estas dimensiones se recomienda que todas las imágenes tengan las mismas dimensiones.</p>
-                    <?= $this->Form->create('Variety', array('type'=>'file', 'class'=>'form-horizontal', 'url'=>array('controller'=>'admins','action'=>'save_variety'))) ?>
+                    <?= $this->Form->create('Variety', array('type'=>'file', 'class'=>'form-horizontal', 'url'=>array('controller'=>'admins','action'=>'editing_variety/'.$variety['Variety']['variety_id']))) ?>
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Nombre de la variedad</label>
                         <div class="col-sm-10">
@@ -107,6 +107,7 @@
                           <input type="text" class="form-control" name="ingredientes" value="<?= $variety['Variety']['ingredients'] ?>" placeholder="Ingredientes">
                         </div>
                       </div>
+                      
                       <div class="form-group">
                         <label class="col-sm-2 control-label">Foto</label>
                         <div class="col-sm-10">
@@ -115,7 +116,7 @@
                       </div>
                       <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                          <button type="submit" class="btn btn-default">Agregar</button>
+                          <button type="submit" class="btn btn-default">Guardar</button>
                         </div>
                       </div>
                     <?= $this->Form->end() ?>
