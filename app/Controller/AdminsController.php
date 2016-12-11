@@ -6,6 +6,7 @@ class AdminsController extends AppController
     //pagina principal ESTADISTICAS
     public function index()
     {
+       $this->authenticateAdmin();
         //SE CARGA LOS MODELOS
        $this->loadModel("Customer");
        $this->loadModel("Sale");

@@ -54,4 +54,16 @@ class AppController extends Controller
             $this->redirect(array('controller'=>'users','action'=>'index'));
         }
     }
+
+     // Comprobar si el usuario está logueado
+    function authenticateAdmin()
+    {
+        // Comprobamos si la variable de sesión existe. Si es así quiere decir que el usuario se ha logueado
+        //correctamente y se le redirecciona a la aplicación.
+        //Si no existe se le devuelve al login.
+        if(! $this->Session->check('admin'))
+        {
+            $this->redirect(array('controller'=>'users','action'=>'admin'));
+        }
+    }
 }
