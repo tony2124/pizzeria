@@ -25,6 +25,7 @@ class AdminsController extends AppController
 
     //METODO PARA CAMBIAR LA IMAGEN DE PORTADA
     public function portada(){
+        $this->authenticateAdmin();
         if($this->request->is('post'))
         {
          //   if( $this->request->data['img']['foto'] )
@@ -47,6 +48,7 @@ class AdminsController extends AppController
 
     public function users($n = NULL)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel("Customer");
         
@@ -69,6 +71,7 @@ class AdminsController extends AppController
     //MÉTODO PARA EDITAR EL STATUS DEL USUARIO
     public function edit_user($id, $type)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel("Customer");
 
@@ -86,6 +89,7 @@ class AdminsController extends AppController
     //ACCION PARA VARIEDADES
     public function varieties()
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
     	$this->loadModel('Variety');
 
@@ -99,6 +103,7 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE GUARDAR UNA VARIEDAD
     public function save_variety()
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel('Variety');
 
@@ -133,6 +138,7 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE EDITAR LOS DATOS DE UNA VARIEDAD
     public function edit_variety($id)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel('Variety');
 
@@ -146,6 +152,7 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE EDITAR LOS DATOS DE UNA VARIEDAD
     public function editing_variety($id)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel("Variety");
 
@@ -184,11 +191,13 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE VISUALIZAR LAS PROMOCIONES
     public function promotions()
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel('Promotion');
 
         //SE CONSULTAN LOS DATOS
-        $promotions = $this->Promotion->find('all');
+        $promotions = $this->Promotion->find('all', array('conditions'=>array('approved'=>true)));
+
 
         //SE ENVIAN LOS DATOS
         $this->set('promotions', $promotions);
@@ -197,6 +206,7 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE EDITAR LAS PROMOCIONES
     public function edit_promotion($id)
     {
+        $this->authenticateAdmin();
         $this->loadModel('Promotion');
         $promotion = $this->Promotion->find('first', array('conditions'=>array('promotion_id'=>$id)));
         $this->set('promotion', $promotion);   
@@ -205,6 +215,7 @@ class AdminsController extends AppController
     //ACCION QUE PERMITE EDITAR LOS DATOS DE UNA VARIEDAD
     public function editing_promotion($id)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel("Promotion");
 
@@ -243,6 +254,7 @@ class AdminsController extends AppController
     //ACCION QUE GUARDA UNA PROMOCION
     public function save_promotion()
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel('Promotion');
 
@@ -281,6 +293,7 @@ class AdminsController extends AppController
     //TYPE = 1 ELIMINA UN REGISTRO CON EL ID DE LAS PROMOCIONES
     public function delete( $type , $id)
     {
+        $this->authenticateAdmin();
         //SI TIPO ES 1
         if( $type == 1 )
         {
@@ -288,7 +301,7 @@ class AdminsController extends AppController
             $this->loadModel("Promotion");
             
             //ELIMINA REGISTRO
-            $this->Promotion->updateAll(array('approved'=>false),array('promotion_id'=>$id));
+            $this->Promotion->updateAll(array('approved'=>'0'),array('promotion_id'=>''.$id));
 
             //REDIRECCIONA A LA ACCION PROMOCIONES
             $this->redirect(array('controller'=>'admins', 'action'=>'promotions'));
@@ -298,7 +311,7 @@ class AdminsController extends AppController
             //SE CARGA MODELO
             $this->loadModel("Variety");
             //ELIMINA LA VARIEDAD
-            $this->Variety->updateAll(array('approved'=>false),array('variety_id'=>$id));
+            $this->Variety->updateAll(array('approved'=>'0'),array('variety_id'=>''.$id));
             
             //REDIRECCIONA A LA ACCION VARIEDADES
             $this->redirect(array('controller'=>'admins', 'action'=>'varieties'));
@@ -307,6 +320,7 @@ class AdminsController extends AppController
 
     public function orders($n = NULL)
     {
+        $this->authenticateAdmin();
         $this->loadModel("Sale");
 
         //PAGINACION DE USUARIOS REGISTRADOS, SE HACE CONSULTA DE LOS USUARIOS
@@ -327,6 +341,7 @@ class AdminsController extends AppController
 
     public function orderdetail( $id = NULL )
     {
+        $this->authenticateAdmin();
         $this->loadModel('Sale');
         $this->loadModel('SaleDetail');
         $sales = $this->Sale->query('SELECT * FROM sales as Sale JOIN customers as Customer WHERE Sale.customer_id = Customer.customer_id AND Sale.sale_id = '.$id);
@@ -338,6 +353,7 @@ class AdminsController extends AppController
     //MÉTODO PARA EDITAR EL STATUS DEL USUARIO
     public function edit_order( $id, $type)
     {
+        $this->authenticateAdmin();
         //SE CARGA EL MODELO
         $this->loadModel("Sale");
 

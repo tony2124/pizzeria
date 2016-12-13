@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2016 a las 22:02:20
+-- Tiempo de generación: 13-12-2016 a las 00:37:38
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -33,6 +33,13 @@ CREATE TABLE `admins` (
   `admin_pass` varchar(45) NOT NULL,
   `registered` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_user`, `admin_pass`, `registered`) VALUES
+(1, 'Alfonso Calderon', 'alfonso.calderon.chavez@gmail.com', '1234', '2016-12-07');
 
 -- --------------------------------------------------------
 
@@ -73,16 +80,17 @@ CREATE TABLE `promotions` (
   `promotion_title` varchar(60) NOT NULL,
   `promotion_desc` varchar(200) NOT NULL,
   `promotion_type` int(11) NOT NULL DEFAULT '0',
-  `promotion_photo` varchar(120) NOT NULL
+  `promotion_photo` varchar(120) NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `promotions`
 --
 
-INSERT INTO `promotions` (`promotion_id`, `promotion_title`, `promotion_desc`, `promotion_type`, `promotion_photo`) VALUES
-(1, 'Un refresco 2L GRATIS', 'LLÃ©vate un refresco gratis de 2L en la compra de una pizza mediana o familiar. Cualquier sabor, incluyendo Coca Cola. \r\n', 3, '2016_11_07_13_58_10.png'),
-(3, 'Lunes de 2 x 1', 'Visita nuestro estabelcimiento los dÃ­as lunes y disfruta de la promociÃ³n que tenemos especialmente para ti. Â¡Ordena dos pizzas y paga sÃ³lamente una!', 2, '2016_10_04_20_35_47.jpg');
+INSERT INTO `promotions` (`promotion_id`, `promotion_title`, `promotion_desc`, `promotion_type`, `promotion_photo`, `approved`) VALUES
+(1, 'Un refresco 2L GRATIS', 'LLÃ©vate un refresco gratis de 2L en la compra de una pizza mediana o familiar. Cualquier sabor, incluyendo Coca Cola. \r\n', 3, '2016_11_07_13_58_10.png', 0),
+(3, 'Lunes de 2 x 1', 'Visita nuestro estabelcimiento los dÃ­as lunes y disfruta de la promociÃ³n que tenemos especialmente para ti. Â¡Ordena dos pizzas y paga sÃ³lamente una!', 2, '2016_10_04_20_35_47.jpg', 0);
 
 -- --------------------------------------------------------
 

@@ -6,8 +6,8 @@ class PizzasController extends AppController
     {
         $this->loadModel('Variety');
         $this->loadModel('Promotion');
-        $varieties = $this->Variety->find('all');
-        $promotions = $this->Promotion->find('all');
+        $varieties = $this->Variety->find('all', array('conditions'=>array('approved'=>true)));
+        $promotions = $this->Promotion->find('all', array('conditions'=>array('approved'=>true)));
         $this->set('varieties',$varieties);
         $this->set('promotions',$promotions);
     }

@@ -77,13 +77,11 @@ class UsersController extends AppController
 	         if($cust)
 	         {
 		        //Si existe se redirecciona al usuario a la aplicación creando una variable de sesión 
-		        $this->Session->write('name',$cust['Customer']['customer_name']);
-		        $this->Session->write('id',$cust['Customer']['customer_id']);
-		        $this->Session->write('email',$cust['Customer']['customer_email']);
-		        $this->Session->write('address',$cust['Customer']['customer_address']);
-		        $this->Session->write('tel',$cust['Customer']['customer_tel']);
+		        $this->Session->write('name',$cust['Admin']['admin_name']);
+		        $this->Session->write('id',$cust['Admin']['admin_id']);
+		        $this->Session->write('user',$cust['Admin']['admin_user']);
 		         
-		        $this->redirect(array('controller'=>'pizzas','action'=>'ordena'));
+		        $this->redirect(array('controller'=>'admins','action'=>'index'));
 		        
 	         }
 	         else
@@ -91,7 +89,7 @@ class UsersController extends AppController
 			  //Si los datos no son correctos se comunica al usuario y se le devuelve al mismo
 	          //formulario de login
 	          $this->Session->setFlash(__('<p class="label label-danger">Nombre de usuario y/o password incorrectos</p>'));
-	          $this->redirect(array('action'=>'index'));
+	          $this->redirect(array('action'=>'admin'));
 	         }
 		}
 
