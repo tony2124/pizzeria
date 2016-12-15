@@ -142,7 +142,7 @@
                                     <td>
                                         <?= $ie[$i]['Ingredient']['nombre']." ( + $".$ie[ $i ]['Ingredient']['costo']." pesos)" ?>
                                         
-                                        <input name="ingredient_id[]" type="hidden" value="<?= $ie[$i]['Ingredient']['ingredient_id'] ?>">
+                                        <input name="ie[]" type="hidden" value="<?= $ie[$i]['Ingredient']['nombre'] ?>">
                                     </td>
                                     <td align="right"><?= "$".($size['Size']['price'] + $ie[ $i ]['Ingredient']['costo']) ?></td>
                                     <?php $total += ($size['Size']['price'] + $ie[ $i++ ]['Ingredient']['costo'])  ?>

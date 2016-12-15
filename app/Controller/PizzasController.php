@@ -86,6 +86,7 @@ class PizzasController extends AppController
 
         $sizes_id = $this->request->data['size_id'];
         $varieties_id = $this->request->data['variety_id'];
+        $ingredient_name = $this->request->data['ie'];
 
         $data = [
             'customer_id'=>$this->request->data['orden']['customer_id'],
@@ -113,7 +114,8 @@ class PizzasController extends AppController
                 $data_detail[$i] = array(
                             'sale_id'=>$id,
                             'size_id'=> $size_id,
-                            'variety_id'=> $varieties_id[$i++]
+                            'variety_id'=> $varieties_id[$i],
+                            'extra'=>$ingredient_name[$i++]
                             );
             }
 

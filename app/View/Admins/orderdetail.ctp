@@ -92,7 +92,7 @@
                                     <th width="10%">NÚM. ÓRDEN</th>
                                     <th>TAMAÑO</th>
                                     <th>VARIEDAD</th>
-                                    <th>PRECIO</th>
+                                    <th>INGREDIENTE EXTRA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -102,8 +102,8 @@
                                 <tr>
                                     <td><?= $id ?></td>
                                     <td><?= $detail['Size']['size_name'] ?></td>
-                                    <td><?= $detail['Variety']['variety_name'] ?></td>
-                                    <td><?= '$ '.$detail['Size']['price'] ?></td>
+                                    <td><?= $detail['Variety']['variety_name'] . ' ('.$detail['Variety']['ingredients'].')' ?></td>
+                                    <td><?= $detail['SaleDetail']['extra'] ?></td>
                                 </tr>
                             <?php } ?>
                             </tbody>
