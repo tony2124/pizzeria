@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2016 a las 00:37:38
+-- Tiempo de generación: 15-12-2016 a las 02:58:44
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 5.6.19
 
@@ -72,6 +72,33 @@ INSERT INTO `customers` (`customer_id`, `customer_name`, `customer_email`, `cust
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ingredients`
+--
+
+CREATE TABLE `ingredients` (
+  `ingredient_id` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `costo` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ingredients`
+--
+
+INSERT INTO `ingredients` (`ingredient_id`, `nombre`, `costo`) VALUES
+(0, 'NINGUNO', 0),
+(3, 'SALCHICHA', 5),
+(4, 'SALAMI', 5),
+(5, 'JAMON', 5),
+(6, 'PIÃ‘A', 5),
+(7, 'ELOTE', 5),
+(8, 'JALAPEÃ‘O', 5),
+(9, 'TOCINO', 5),
+(10, 'CHAMPIÃ‘ON', 10);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `promotions`
 --
 
@@ -89,8 +116,8 @@ CREATE TABLE `promotions` (
 --
 
 INSERT INTO `promotions` (`promotion_id`, `promotion_title`, `promotion_desc`, `promotion_type`, `promotion_photo`, `approved`) VALUES
-(1, 'Un refresco 2L GRATIS', 'LLÃ©vate un refresco gratis de 2L en la compra de una pizza mediana o familiar. Cualquier sabor, incluyendo Coca Cola. \r\n', 3, '2016_11_07_13_58_10.png', 0),
-(3, 'Lunes de 2 x 1', 'Visita nuestro estabelcimiento los dÃ­as lunes y disfruta de la promociÃ³n que tenemos especialmente para ti. Â¡Ordena dos pizzas y paga sÃ³lamente una!', 2, '2016_10_04_20_35_47.jpg', 0);
+(1, 'Un refresco 2L GRATIS', 'LLÃ©vate un refresco gratis de 2L en la compra de una pizza mediana o familiar. Cualquier sabor, incluyendo Coca Cola. \r\n', 3, '2016_11_07_13_58_10.png', 1),
+(3, 'Lunes de 2 x 1', 'Visita nuestro estabelcimiento los dÃ­as lunes y disfruta de la promociÃ³n que tenemos especialmente para ti. Â¡Ordena dos pizzas y paga sÃ³lamente una!', 2, '2016_10_04_20_35_47.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -136,7 +163,8 @@ INSERT INTO `sales` (`sale_id`, `customer_id`, `total`, `telefono`, `colonia`, `
 (60, 1, 208, '4531064590', 'Col. Beenito Juarez', 'num 34', 'juan escutia', 'Casa verde de la nueva cosa', '2016-09-27 01:48:06', 1),
 (61, 1, 30, '983948', 'cilow', 'num', 'sdijij ', 'dsaosdoasnadiasidi ', '2016-09-29 17:51:06', 1),
 (62, 5, 90, '4351234312', 'Benito Jurez', 'Num 23, ext 45', 'Revolucion', 'Casa verde con esquina madero', '2016-10-11 22:31:27', 0),
-(63, 1, 79, '4531064590', 'Benito Juarez', 'num 45', 'Juan escutia', 'asdasd asd ads', '2016-11-07 17:03:55', 0);
+(63, 1, 79, '4531064590', 'Benito Juarez', 'num 45', 'Juan escutia', 'asdasd asd ads', '2016-11-07 17:03:55', 0),
+(64, 1, 135, '4252315478', 'EL CEÃ‘IDOR', 'num int 32 ext 45', '16 de septiembre #45', 'Casa verde aszul', '2016-12-15 02:23:19', 0);
 
 -- --------------------------------------------------------
 
@@ -148,46 +176,51 @@ CREATE TABLE `sale_details` (
   `sale_detail_id` int(11) NOT NULL,
   `sale_id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL,
-  `variety_id` int(11) NOT NULL
+  `variety_id` int(11) NOT NULL,
+  `extra` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `sale_details`
 --
 
-INSERT INTO `sale_details` (`sale_detail_id`, `sale_id`, `size_id`, `variety_id`) VALUES
-(2, 30, 2, 2),
-(3, 30, 3, 1),
-(4, 30, 3, 2),
-(5, 31, 1, 1),
-(6, 32, 1, 1),
-(7, 32, 1, 1),
-(8, 32, 1, 1),
-(9, 30, 1, 1),
-(10, 43, 1, 1),
-(11, 44, 1, 1),
-(12, 45, 1, 1),
-(13, 48, 1, 1),
-(14, 49, 3, 1),
-(15, 52, 3, 1),
-(16, 53, 3, 1),
-(17, 54, 3, 1),
-(18, 55, 3, 1),
-(19, 56, 3, 1),
-(20, 58, 3, 1),
-(21, 58, 1, 2),
-(22, 59, 1, 1),
-(23, 59, 1, 1),
-(24, 59, 1, 1),
-(25, 59, 1, 1),
-(26, 60, 3, 2),
-(27, 60, 2, 1),
-(28, 60, 1, 2),
-(29, 61, 1, 1),
-(30, 62, 1, 1),
-(31, 62, 1, 1),
-(32, 62, 1, 1),
-(33, 63, 2, 15);
+INSERT INTO `sale_details` (`sale_detail_id`, `sale_id`, `size_id`, `variety_id`, `extra`) VALUES
+(2, 30, 2, 2, NULL),
+(3, 30, 3, 1, NULL),
+(4, 30, 3, 2, NULL),
+(5, 31, 1, 1, NULL),
+(6, 32, 1, 1, NULL),
+(7, 32, 1, 1, NULL),
+(8, 32, 1, 1, NULL),
+(9, 30, 1, 1, NULL),
+(10, 43, 1, 1, NULL),
+(11, 44, 1, 1, NULL),
+(12, 45, 1, 1, NULL),
+(13, 48, 1, 1, NULL),
+(14, 49, 3, 1, NULL),
+(15, 52, 3, 1, NULL),
+(16, 53, 3, 1, NULL),
+(17, 54, 3, 1, NULL),
+(18, 55, 3, 1, NULL),
+(19, 56, 3, 1, NULL),
+(20, 58, 3, 1, NULL),
+(21, 58, 1, 2, NULL),
+(22, 59, 1, 1, NULL),
+(23, 59, 1, 1, NULL),
+(24, 59, 1, 1, NULL),
+(25, 59, 1, 1, NULL),
+(26, 60, 3, 2, NULL),
+(27, 60, 2, 1, NULL),
+(28, 60, 1, 2, NULL),
+(29, 61, 1, 1, NULL),
+(30, 62, 1, 1, NULL),
+(31, 62, 1, 1, NULL),
+(32, 62, 1, 1, NULL),
+(33, 63, 2, 15, NULL),
+(34, 64, 1, 1, NULL),
+(35, 64, 1, 1, NULL),
+(36, 64, 1, 1, NULL),
+(37, 64, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,11 +263,11 @@ CREATE TABLE `varieties` (
 
 INSERT INTO `varieties` (`variety_id`, `variety_name`, `ingredients`, `picture`, `approved`) VALUES
 (1, 'Alemana', 'Salchicha y elote', 'alemana.jpg', 1),
-(2, 'Peperoni eEDd', 'Peperoni', '2016_11_07_13_49_04.png', 1),
+(2, 'Peperoni eEDd', 'Peperoni', '2016_11_07_13_49_04.png', 0),
 (12, 'Hawaiana', 'JamÃ³n y piÃ±a', '2016_09_29_21_31_10.jpg', 1),
 (13, 'Tres quesos', 'Tres diferentes quesos y piÃ±a', '2016_09_29_21_33_26.jpg', 1),
 (14, 'California', 'JamÃ³n, salchicha y jalapeÃ±o.', '2016_09_29_21_34_31.jpg', 1),
-(15, 'Italiana', 'Peperoni, salami, salchicha, jamÃ³n y tocino', '2016_09_29_21_41_54.jpg', 1),
+(15, 'Italiana', 'Peperoni, salami, salchicha, jamÃ³n', '2016_09_29_21_41_54.jpg', 1),
 (16, 'Imperial', 'Salami, jalapeÃ±o, tocino y champiÃ±Ã³n', '2016_09_29_21_42_24.jpg', 1),
 (18, 'Romana', 'Peperoni, tocino y jalapeÃ±o.', '2016_09_29_21_43_58.jpg', 1),
 (19, 'Vegetariana', 'Salami, jalapeÃ±o, tocino y champiÃ±Ã³n.', '2016_10_04_20_44_08.jpg', 1);
@@ -254,6 +287,12 @@ ALTER TABLE `admins`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`);
+
+--
+-- Indices de la tabla `ingredients`
+--
+ALTER TABLE `ingredients`
+  ADD PRIMARY KEY (`ingredient_id`);
 
 --
 -- Indices de la tabla `promotions`
@@ -299,6 +338,11 @@ ALTER TABLE `varieties`
 ALTER TABLE `customers`
   MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT de la tabla `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
 -- AUTO_INCREMENT de la tabla `promotions`
 --
 ALTER TABLE `promotions`
@@ -307,12 +351,12 @@ ALTER TABLE `promotions`
 -- AUTO_INCREMENT de la tabla `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- AUTO_INCREMENT de la tabla `sale_details`
 --
 ALTER TABLE `sale_details`
-  MODIFY `sale_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `sale_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 --
 -- AUTO_INCREMENT de la tabla `sizes`
 --
