@@ -119,6 +119,17 @@
     				      </select>
     				    </div>
     				</div>
+                    <div class="form-group form-group-lg">
+                        <label class="col-sm-3 control-label">Ingrediente extra</label>
+                        <div class="col-sm-9">
+                          <select name="ingredient_extra[]" class="form-control">
+                            <option value="0">Ninguno</option>
+                            <?php foreach ($ingredients as $var) { ?>
+                                <option value="<?= $var['Ingredient']['ingredient_id'] ?>"><?= $var['Ingredient']['nombre'] ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                    </div>
                 <?php
                     }
                 ?>

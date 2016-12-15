@@ -25,10 +25,14 @@ class PizzasController extends AppController
         $this->loadModel('Size');
         $sizes = $this->Size->find('all');
 
+        $this->loadModel('Ingredient');
+        $ingredients = $this->Ingredient->find('all');
+
         $this->loadModel('Variety');
         $varieties = $this->Variety->find('all',array('conditions'=>array('approved'=>true)));
 
         $this->set('sizes',$sizes);
+        $this->set('ingredients',$ingredients);
         $this->set('varieties',$varieties);
         $this->set('number',$number);
 
@@ -44,6 +48,8 @@ class PizzasController extends AppController
         
         $sizes_id = $this->request->data['size_id']; 
         $varieties_id = $this->request->data['variety_id'];
+        $ingredient_extra = $this->request->data['ingredient_extra'];
+
         $i = 0;
         foreach ($sizes_id as $size_id) {
             $sizes[$i++] = $this->Size->findBySizeId($size_id); 
@@ -56,8 +62,16 @@ class PizzasController extends AppController
             //->where(array('variety_id'=>$variety_id))->first();
         }
 
+        $this->loadModel('Ingredient');
+        $i = 0;
+        foreach ($ingredient_extra as $ie) {
+            $ingredient_extra[$i++] = $this->Ingredient->findByIngredientId($ie); 
+            //->where(array('variety_id'=>$variety_id))->first();
+        }
+
         $this->set('sizes',$sizes);
         $this->set('varieties',$varieties);
+        $this->set('ie',$ingredient_extra);
     }
     else{
         $this->redirect(array('action'=>'ordena'));

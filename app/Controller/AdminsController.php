@@ -188,6 +188,47 @@ class AdminsController extends AppController
 
     }
 
+    //ACCION PARA ADMINISTRAR INGREDIENTES
+    public function ingredients()
+    {
+        $this->authenticateAdmin();
+
+        //SE CARGA EL MODELO
+        $this->loadModel('Ingredient');
+
+        //SE CONSULTAN LOS DATOS
+        $ingredients = $this->Ingredient->find('all');
+
+
+        //SE ENVIAN LOS DATOS
+        $this->set('ingredients', $ingredients);   
+    }
+
+    public function saving_ingredient()
+    {
+        $this->authenticateAdmin();
+        //SE CARGA EL MODELO
+        $this->loadModel('Ingredient');
+
+        //SI SE ENVIARON DATOS
+        if($this->request->is('post'))
+        {
+            //SE PREPARA LA IMAGEN
+            
+                //SE PREPARAN LOS DATOS
+                $data = array(
+                  'nombre'=>$this->request->data['nombre'],
+                  'costo'=>$this->request->data['costo']
+                  );
+
+                //SE GUARDAN LOS DATOS EN LA BASE DE DATOS
+                $this->Ingredient->save( $data );
+
+                //SE REDIRECCIONA  A LA ACCION VARIEDADES
+                $this->redirect(array('controller'=>'admins', 'action'=>'ingredients'));
+        }
+    }
+
     //ACCION QUE PERMITE VISUALIZAR LAS PROMOCIONES
     public function promotions()
     {
@@ -306,7 +347,7 @@ class AdminsController extends AppController
             //REDIRECCIONA A LA ACCION PROMOCIONES
             $this->redirect(array('controller'=>'admins', 'action'=>'promotions'));
         }
-        else //SI NO
+        else if( $type == 2 ) //SI NO
         {
             //SE CARGA MODELO
             $this->loadModel("Variety");
@@ -315,6 +356,16 @@ class AdminsController extends AppController
             
             //REDIRECCIONA A LA ACCION VARIEDADES
             $this->redirect(array('controller'=>'admins', 'action'=>'varieties'));
+        }
+        else if( $type == 3 ) //SI NO
+        {
+            //SE CARGA MODELO
+            $this->loadModel("Ingredient");
+            //ELIMINA LA VARIEDAD
+            $this->Ingredient->deleteAll(array('ingredient_id'=>''.$id), false);
+            
+            //REDIRECCIONA A LA ACCION VARIEDADES
+            $this->redirect(array('controller'=>'admins', 'action'=>'ingredients'));
         }
     }
 

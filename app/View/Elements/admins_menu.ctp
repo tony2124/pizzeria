@@ -51,6 +51,10 @@
                 
             </li>
             <li>
+                <a href="<?= $this->Html->url(array('controller'=>'admins','action'=>'ingredients')) ?>"><i class="fa fa-fw fa-list"></i> Ingredientes</a>
+                
+            </li>
+            <li>
                 <a href="<?= $this->Html->url(array('controller'=>'admins','action'=>'promotions')) ?>"><i class="fa fa-fw fa-trophy"></i> Promociones</a>
                 
             </li>

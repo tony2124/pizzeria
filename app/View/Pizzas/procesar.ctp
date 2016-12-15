@@ -118,6 +118,7 @@
                             <th>No.</th>
                             <th>Tamaño</th>
                             <th>Variedad</th>
+                            <th>Ingred. extras</th>
                             <th>Total</th>
                         </thead>
                         <tbody>
@@ -136,13 +137,19 @@
                                     <td>
                                         <?= $varieties[$i]['Variety']['variety_name']." (".$varieties[ $i ]['Variety']['ingredients'].")" ?>
                                         
-                                        <input name="variety_id[]" type="hidden" value="<?= $varieties[$i++]['Variety']['variety_id'] ?>">
+                                        <input name="variety_id[]" type="hidden" value="<?= $varieties[$i]['Variety']['variety_id'] ?>">
                                     </td>
-                                    <td align="right"><?= "$".$size['Size']['price'] ?></td>
-                                    <?php $total += $size['Size']['price'] ?>
+                                    <td>
+                                        <?= $ie[$i]['Ingredient']['nombre']." ( + $".$ie[ $i ]['Ingredient']['costo']." pesos)" ?>
+                                        
+                                        <input name="ingredient_id[]" type="hidden" value="<?= $ie[$i]['Ingredient']['ingredient_id'] ?>">
+                                    </td>
+                                    <td align="right"><?= "$".($size['Size']['price'] + $ie[ $i ]['Ingredient']['costo']) ?></td>
+                                    <?php $total += ($size['Size']['price'] + $ie[ $i++ ]['Ingredient']['costo'])  ?>
                                 </tr>
                             <?php } ?>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
